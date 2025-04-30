@@ -1,22 +1,26 @@
 from typing import List
 
 class Solution:
+    
+    # With for loop
     def removeElement(self, nums: List[int], val: int) -> int:
-        k = 0
         l = 0
-        r = len(nums) - 1
-        while l < r:
-            if nums[l] == val:
-                k += 1
-                if nums[r] == val:
-                    r -= 1
-                else:
-                    nums[l] = nums[r]
-                    nums[r] = val
-                    l += 1
-            else:
+        for i in range(len(nums)):
+            if nums[i] != val:
+                nums[l] = nums[i]
                 l += 1
 
-        print(nums)
-                
-        return k
+        return l
+    
+    # With while loop:
+    # def removeElement(self, nums: List[int], val: int) -> int:
+    # l = 0
+    # r = len(nums) - 1
+    
+    # while l <= r:
+    #     if nums[l] == val:
+    #             nums[l] = nums[r]
+    #             r -=1
+    #     else:
+    #         l += 1
+    # return l
