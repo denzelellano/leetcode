@@ -13,9 +13,44 @@ from typing import List
 # Return the modified image after performing the flood fill.
 
 # Example 1:
-# Input: image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, color = 2
-# Output: [[2,2,2],[2,2,0],[2,0,1]]
+# Input: image = [[1,1,1],
+#                 [1,1,0],
+#                 [1,0,1]], sr = 1, sc = 1, color = 2
+# Output: [[2,2,2],
+#          [2,2,0],
+#          [2,0,1]]
 
 class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
         
+        if image[sr][sc] == color:
+            return image
+        
+        self.recurse(image, sr, sc, color, image[sr][sc])
+        
+        return image
+        
+    def recurse(self, image: List[List[int]], row: int, col: int, color: int, startingColour: int):
+        if row < 0 or row >= len(image) or col < 0 or col >= len(image):
+            return
+        
+        if image[row][col] != startingColour:
+            return
+        
+        image[row][col] = color
+        
+        self.recurse(image, row + 1, col, color, startingColour)
+        self.recurse(image, row - 1, col, color, startingColour)
+        self.recurse(image, row, col + 1, color, startingColour)
+        self.recurse(image, row, col - 1, color, startingColour)
+
+
+image = [[1,1,1], [1,1,0], [1,0,1]]
+sr = 1
+sc = 1
+color = 2
+
+sol = Solution()
+res = sol.floodFill(image, sr, sc, color)
+
+print(res)
